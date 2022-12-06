@@ -8,10 +8,10 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     
-    isaac_ros_detectnet_package_dir = get_package_share_directory('isaac_ros_detectnet')
+    isaac_launch_package_dir = get_package_share_directory('isaac_launch')
     
-    video_file = os.path.join(get_package_share_directory('isaac_launch'), 'videos', 'plane_flying_past2.mkv')
-    #video_file = os.path.join(get_package_share_directory('isaac_launch'), 'videos', 'brad_drone_1.mp4')
+    video_file = os.path.join(get_package_share_directory('isaac_launch'), 'videos', 'people-in-a-high-street-1920x1080.mp4')
+    #video_file = os.path.join(get_package_share_directory('isaac_launch'), 'videos', 'dashcam-video-1920x1080.mp4')
     camera_info_file = os.path.join(get_package_share_directory('isaac_launch'), 'config', 'camera_info.yaml')
     config = os.path.join(get_package_share_directory('isaac_launch'), 'config', 'params_launch.yaml')
 
@@ -21,25 +21,25 @@ def generate_launch_description():
         #         os.path.join(my_package_dir, 'detectnet_rosbag')]
         #),
 
-        #IncludeLaunchDescription(
-        #    PythonLaunchDescriptionSource([os.path.join(
-        #        isaac_ros_detectnet_package_dir, 'launch'),
-        #        '/isaac_ros_detectnet.launch.py'])
-        #),
-
-        Node(
-            name='usb_cam',
-            package='usb_cam',
-            executable='usb_cam_node_exe',
-            remappings=[('image_raw', 'camera_image')]
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                isaac_launch_package_dir, 
+                '/isaac_ros_detectnet.launch.py'])
         ),
+
+        #Node(
+        #    name='usb_cam',
+        #    package='usb_cam',
+        #    executable='usb_cam_node_exe',
+        #    remappings=[('image_raw', 'camera_image')]
+        #),
 
         Node(
             name='camera_simulator',
             package='camera_simulator',
             executable='camera_simulator',
             parameters = [config],
-            remappings=[('image/image_raw', 'video_image')],
+            remappings=[('/camera/image', 'image')],
             arguments=[
                 '--type', 'video', 
                 '--path', video_file, 
@@ -50,14 +50,14 @@ def generate_launch_description():
         Node(
             package='isaac_ros_detectnet',
             executable='isaac_ros_detectnet_visualizer.py',
-            name='detectnet_visualizer'
+            name='detectnet_visualizer',
         ),
 
         Node(
             package='rqt_image_view',
             executable='rqt_image_view',
             name='image_view',
-            #arguments=['/detectnet_processed_image']
-            arguments=['video_image']
+            arguments=['/detectnet_processed_image']
+            #arguments=['image']
         )
     ])
