@@ -31,7 +31,7 @@ def generate_launch_description():
         #    name='usb_cam',
         #    package='usb_cam',
         #    executable='usb_cam_node_exe',
-        #    remappings=[('image_raw', 'camera_image')]
+        #    remappings=[('image_raw', 'image')]
         #),
 
         Node(

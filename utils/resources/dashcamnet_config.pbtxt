@@ -6,21 +6,20 @@ input [
     name: "input_1"
     data_type: TYPE_FP32
     format: FORMAT_NCHW
-    dims: [ 3, 1920, 1080 ]
+    dims: [3, 1080, 1920]
   }
 ]
 output [
   {
-        name: "output_bbox/BiasAdd"
-        data_type: TYPE_FP32
-        dims: [ 12,120,68]
-    },
-    {
-        name: "output_cov/Sigmoid"
-        data_type: TYPE_FP32
-        dims: [ 3,120,68]
-        
-    }
+    name: "output_bbox/BiasAdd"
+    data_type: TYPE_FP32
+    dims: [16,68,120]
+  },
+  {
+    name: "output_cov/Sigmoid"
+    data_type: TYPE_FP32
+    dims: [4,68,120]        
+  }
 ]
 dynamic_batching { }
 version_policy: {

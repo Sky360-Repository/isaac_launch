@@ -38,8 +38,8 @@ def generate_launch_description():
         package='isaac_ros_dnn_encoders',
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
         parameters=[{
-            'network_image_width': 1080,
-            'network_image_height': 1920
+            'network_image_width': 1920,
+            'network_image_height': 1080
         }],
         remappings=[('encoded_tensor', 'tensor_pub')]
     )

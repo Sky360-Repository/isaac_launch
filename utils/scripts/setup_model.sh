@@ -21,9 +21,9 @@
 # default arguments
 MODEL_LINK="https://api.ngc.nvidia.com/v2/models/nvidia/tao/peoplenet/versions/deployable_quantized_v2.5/zip"
 MODEL_FILE_NAME="resnet34_peoplenet_int8.etlt"
-HEIGHT="1920"
-WIDTH="1080"
-CONFIG_FILE_PATH="/workspaces/isaac_ros-dev/src/isaac_launch/utils/resources/quickstart_config.pbtxt"
+HEIGHT="1080"
+WIDTH="1920"
+CONFIG_FILE_PATH="/workspaces/isaac_ros-dev/src/isaac_launch/utils/resources/facedetect_config.pbtxt"
 PRECISION="int8"
 OUTPUT_LAYERS="output_cov/Sigmoid,output_bbox/BiasAdd"
 
